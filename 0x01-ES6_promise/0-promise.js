@@ -1,9 +1,3 @@
-function getResponseFromAPI() {
-  return fetch('https://example.com/api')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Response not OK');
-      }
-      return response.json();
-    });
+export default function getResponseFromAPI() {
+  return new Promise(() => {});
 }
