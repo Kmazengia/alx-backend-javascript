@@ -65,4 +65,4 @@ class StudentClass implements StudentClassInterface {
   displayName(): string {
     return this.firstName;
   }
- }
+}`
