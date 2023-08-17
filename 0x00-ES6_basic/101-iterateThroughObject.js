@@ -1,15 +1,10 @@
 export default function iterateThroughObject(reportWithIterator) {
-  let employeeNames = '';
-  let iterator = reportWithIterator();
+  let n = reportWithIterator.next();
+  let res = '';
 
-  while (true) {
-    let result = iterator.next();
-    if (result.done) {
-      break;
-    }
-
-    employeeNames += result.value + ' | ';
+  while (!n.done) {
+    res += `${n.value} | `;
+    n = reportWithIterator.next();
   }
-
-  return employeeNames.slice(0, -3);
+  return res.slice(0, res.length - 3);
 }
