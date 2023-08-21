@@ -1,30 +1,25 @@
 const fs = require('fs');
 
 function countStudents(path) {
-  if (!fs.existsSync(path)) {
+  try {
+    const data = fs.readFileSync(path, 'utf8');
+    const result = [];
+    data.split('\n').forEach((data) => {
+      result.push(data.split(','));
+    });
+    result.shift();
+    const newis = [];
+    result.forEach((data) => newis.push([data[0], data[3]]));
+    const fields = new Set();
+    newis.forEach((item) => fields.add(item[1]));
+    const final = {};
+    fields.forEach((data) => { (final[data] = 0); });
+    newis.forEach((data) => { (final[data[1]] += 1); });
+    console.log(`Number of students: ${result.filter((check) => check.length > 3).length}`);
+    Object.keys(final).forEach((data) => console.log(`Number of students in ${data}: ${final[data]}. List: ${newis.filter((n) => n[1] === data).map((n) => n[0]).join(', ')}`));
+  } catch (E) {
     throw Error('Cannot load the database');
   }
-  // block other parallel process
-  // and do the current file reading process
-  const data = fs.readFileSync(path, 'utf8');
-  const students = data.split('\n')
-    .map((student) => student.split(','))
-    .filter((student) => student.length === 4 && student[0] !== 'firstname')
-    .map((student) => ({
-      firstName: student[0],
-      lastName: student[1],
-      age: student[2],
-      field: student[3],
-    }));
-  const csStudents = students
-    .filter((student) => student.field === 'CS')
-    .map((student) => student.firstName);
-  const sweStudents = students
-    .filter((student) => student.field === 'SWE')
-    .map((student) => student.firstName);
-  console.log(`Number of students: ${students.length}`);
-  console.log(`Number of students in CS: ${csStudents.length}. List: ${csStudents.join(', ')}`);
-  console.log(`Number of students in SWE: ${sweStudents.length}. List: ${sweStudents.join(', ')}`);
 }
 
 module.exports = countStudents;
