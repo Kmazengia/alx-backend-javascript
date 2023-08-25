@@ -33,12 +33,10 @@ front end
 	2. css
 	3. js
 	4. REACT - framework
-	5. components : states simple datastructure (credux, recoil)
 back end 
 	1. Node js 
 	2. Http servers : More specifically express: used to create communication between your app and the backend server.
 	3. Database 
 	4. SQL/NOSQL
-	5. Deploy on the internet: conteneraization, scalling, 
-
+	5. 
 	3. 
